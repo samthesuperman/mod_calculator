@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Legendary Mod Leader Calculator</title>
+  <title>samthesuperman's Junk Legendary Mods > Leader Calculator</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -13,85 +13,117 @@
       margin: 0;
       padding: 30px;
     }
+
     h1 {
       color: #00ff9d;
+      line-height: 1.3em;
+      margin-bottom: 25px;
     }
+
     .container {
       display: inline-block;
       background: #222;
       padding: 20px 30px;
       border-radius: 12px;
       box-shadow: 0 0 10px #00ff9d;
+      margin-bottom: 30px;
     }
+
+    label {
+      display: inline-block;
+      width: 170px;
+      text-align: right;
+      margin-right: 10px;
+      white-space: nowrap;
+    }
+
     input {
-      width: 60px;
+      width: 70px;
       padding: 5px;
-      margin: 8px;
+      margin: 6px 0;
       border-radius: 5px;
       border: none;
       text-align: center;
       font-size: 1em;
     }
-    button {
-      background: #00ff9d;
-      border: none;
-      color: #111;
-      padding: 10px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 1em;
-    }
-    button:hover {
-      background: #00d68f;
-    }
+
     .result {
       margin-top: 20px;
       font-size: 1.4em;
       color: #00ff9d;
+      font-weight: bold;
+    }
+
+    .conversion-box {
+      display: block;              /* forces it below */
+      background: #1a1a1a;
+      padding: 15px 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #00ff9d66;
+      margin: 0 auto;              /* centers the box */
+      width: max-content;          /* adjusts width to content */
+    }
+
+    .conversion-box h2 {
+      color: #00ff9d;
+      margin-bottom: 10px;
+    }
+
+    .conversion-box p {
+      font-size: 1.1em;
+      line-height: 1.6em;
+      margin: 0;
     }
   </style>
 </head>
 <body>
-  <h1>Legendary Mod → Leader Calculator</h1>
+  <h1>
+    samthesuperman's<br>
+    Junk Legendary Mods &gt; Leader Calculator
+  </h1>
+
   <div class="container">
     <p>Enter how many of each mod type you have:</p>
     <div>
       <label>★ 1-Star Mods:</label>
-      <input type="number" id="oneStar" value="0" min="0" />
+      <input type="number" id="star1" min="0" value="0" oninput="calculateLeaders()" />
     </div>
     <div>
       <label>★★ 2-Star Mods:</label>
-      <input type="number" id="twoStar" value="0" min="0" />
+      <input type="number" id="star2" min="0" value="0" oninput="calculateLeaders()" />
     </div>
     <div>
       <label>★★★ 3-Star Mods:</label>
-      <input type="number" id="threeStar" value="0" min="0" />
+      <input type="number" id="star3" min="0" value="0" oninput="calculateLeaders()" />
     </div>
     <div>
       <label>★★★★ 4-Star Mods:</label>
-      <input type="number" id="fourStar" value="0" min="0" />
+      <input type="number" id="star4" min="0" value="0" oninput="calculateLeaders()" />
     </div>
-    <button onclick="calculateLeaders()">Calculate</button>
+
     <div class="result" id="result">Total Leaders: 0</div>
+  </div>
+
+  <div class="conversion-box">
+    <h2>Conversion Rates</h2>
+    <p>2 × ★ = 1 Leader<br>
+    ★★ = 1 Leader<br>
+    ★★★ = 2 Leaders<br>
+    ★★★★ = 4 Leaders</p>
   </div>
 
   <script>
     function calculateLeaders() {
-      const oneStar = parseInt(document.getElementById('oneStar').value) || 0;
-      const twoStar = parseInt(document.getElementById('twoStar').value) || 0;
-      const threeStar = parseInt(document.getElementById('threeStar').value) || 0;
-      const fourStar = parseInt(document.getElementById('fourStar').value) || 0;
+      const star1 = parseInt(document.getElementById('star1').value) || 0;
+      const star2 = parseInt(document.getElementById('star2').value) || 0;
+      const star3 = parseInt(document.getElementById('star3').value) || 0;
+      const star4 = parseInt(document.getElementById('star4').value) || 0;
 
-      const leaders =
-        Math.floor(oneStar / 2) +
-        twoStar * 1 +
-        threeStar * 2 +
-        fourStar * 4;
-
-      document.getElementById('result').textContent =
-        `Total Leaders: ${leaders}`;
+      const leaders = Math.floor(star1 / 2) + star2 + (star3 * 2) + (star4 * 4);
+      document.getElementById('result').textContent = `Total Leaders: ${leaders}`;
     }
+
+    calculateLeaders();
   </script>
 </body>
 </html>
